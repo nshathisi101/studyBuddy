@@ -26,6 +26,9 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.save
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.prepend("lessons", partial: "lessons/lesson", locals: {lesson: @lesson})
+        end
         format.html { redirect_to lesson_url(@lesson), notice: "Lesson was successfully created." }
         format.json { render :show, status: :created, location: @lesson }
       else
@@ -39,6 +42,9 @@ class LessonsController < ApplicationController
   def update
     respond_to do |format|
       if @lesson.update(lesson_params)
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(@lesson, partial: "lessons/lesson", locals: {lesson: @lesson})
+        end
         format.html { redirect_to lesson_url(@lesson), notice: "Lesson was successfully updated." }
         format.json { render :show, status: :ok, location: @lesson }
       else
@@ -66,6 +72,6 @@ class LessonsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lesson_params
-      params.require(:lesson).permit(:topic, :field, :description)
+      params.require(:lesson).permit(:topic, :field, :description, :user_id)
     end
 end

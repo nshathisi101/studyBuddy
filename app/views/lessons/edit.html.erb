@@ -1,3 +1,5 @@
+<%= turbo_frame_tag :model do%>
+<div data-controller="turbomodal" data-action="turbo:submit-end->turbomodal#submitEnd">
 <div class="mx-auto md:w-2/3 w-full">
   <h1 class="font-bold text-4xl">Editing lesson</h1>
 
@@ -6,3 +8,6 @@
   <%= link_to "Show this lesson", @lesson, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   <%= link_to "Back to lessons", lessons_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 </div>
+</div>
+<%end%>
+

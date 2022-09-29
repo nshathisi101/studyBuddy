@@ -5,15 +5,47 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <style>
+
+.myClass2{display:none;}
+.myClass{display:block;}
+</style>
   </head>
 
   <body>
+  <%= render 'layouts/header' %>
     <main class="container mx-auto mt-28 px-5 flex">
+     
       <%= yield %>
     </main>
   </body>
+  <script>
+$(document).ready(function() {
+   $("#clickedMe").click(function(){
+    alert("clickedMe")
+   });
+});
+
+  document.getElementById("clickedMe").onclick = function(){alert("clickedMe")}
+  $('#clickedMe').click(function(){
+  alert("clickedMe")
+});
+function closeccc(){
+  document.getElementById('theModalDark').classList.remove('myClass');
+  document.getElementById('theModal').classList.remove('myClass');
+
+  document.getElementById('theModalDark').classList.add('myClass2');
+  document.getElementById('theModal').classList.add('myClass2');
+}
+
+
+</script>
 </html>
