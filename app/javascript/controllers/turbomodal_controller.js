@@ -6,11 +6,7 @@ export default class extends Controller {
   }
   submitEnd(e){
     if (e.detail.success){
-      document.getElementById('theModalDark').classList.remove('myClass');
-      document.getElementById('theModal').classList.remove('myClass');
-    
-      document.getElementById('theModalDark').classList.add('myClass2');
-      document.getElementById('theModal').classList.add('myClass2');
+      toggleModal('modal-id')
     }
   }
   hideModal(){

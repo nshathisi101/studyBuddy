@@ -13,14 +13,18 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
 
 .myClass2{display:none;}
 .myClass{display:block;}
+section {
+  font-family: 'Inter', sans-serif;
+}
 </style>
   </head>
 
-  <body>
+  <body class="shadow dark:bg-gray-700">
   <%= render 'layouts/header' %>
     <main class="container mx-auto mt-28 px-5 flex">
      
@@ -28,6 +32,27 @@
     </main>
   </body>
   <script>
+// set the modal menu element
+ function toggleModal(modalID){
+      document.getElementById(modalID).classList.toggle("hidden");
+    var me=document.getElementById(modalID + "-backdrop");
+    console.log(modalID + "-backdrop")
+    me.classList.toggle("hidden");
+    document.getElementById(modalID).classList.toggle("flex");
+    document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+ }
+
+
+
+
+// show the modal
+///modal.show();
+
+// hide the modal
+//modal.hide();
+
+
+
 $(document).ready(function() {
    $("#clickedMe").click(function(){
     alert("clickedMe")
