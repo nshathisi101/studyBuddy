@@ -16,18 +16,13 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
 
-.myClass2{display:none;}
-.myClass{display:block;}
-section {
-  font-family: 'Inter', sans-serif;
-}
 </style>
   </head>
 
   <body class="shadow dark:bg-gray-700">
   <%= render 'layouts/header' %>
-    <main class="container mx-auto mt-28 px-5 flex">
-     
+    <main class="container flex justify-center item-center">
+     <%= render 'lessons/model' %>
       <%= yield %>
     </main>
   </body>
@@ -41,35 +36,6 @@ section {
     document.getElementById(modalID).classList.toggle("flex");
     document.getElementById(modalID + "-backdrop").classList.toggle("flex");
  }
-
-
-
-
-// show the modal
-///modal.show();
-
-// hide the modal
-//modal.hide();
-
-
-
-$(document).ready(function() {
-   $("#clickedMe").click(function(){
-    alert("clickedMe")
-   });
-});
-
-  document.getElementById("clickedMe").onclick = function(){alert("clickedMe")}
-  $('#clickedMe').click(function(){
-  alert("clickedMe")
-});
-function closeccc(){
-  document.getElementById('theModalDark').classList.remove('myClass');
-  document.getElementById('theModal').classList.remove('myClass');
-
-  document.getElementById('theModalDark').classList.add('myClass2');
-  document.getElementById('theModal').classList.add('myClass2');
-}
 
 
 </script>

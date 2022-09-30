@@ -2,10 +2,21 @@
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
-
-  <%= render 'lessons/model' %>
-
-  <div id="lessons" class="min-w-full">
-    <%= render @lessons %>
+  <div id="test">
   </div>
+
+    <%= turbo_stream_from "public_joins" %>
+    <% lessons_channel = current_user ? "private_lessons" : "public_lessons" %>
+    <%= turbo_stream_from lessons_channel %>
+    <%= turbo_stream_from [@user_gid, 'private_joins'] %>
+    <%= content_tag(:div, id: lessons_channel) do %>
+      <% @lessons.each do |lesson| %>
+      <% if current_user %>
+        <%= render  "lessons/lesson",lesson: lesson, join_status: current_user.joined?(lesson), current_user: current_user  %>
+      <% else %>
+        <%= render "lessons/lesson", lesson: lesson %>
+      <% end %>
+      <% end %>
+    <% end %>
+  
 </div>

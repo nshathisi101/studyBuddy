@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_28_161909) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_30_095718) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -67,6 +67,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_161909) do
     t.index ["user_id"], name: "index_likeables_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "lessons_id", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lessons_id"], name: "index_messages_on_lessons_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -86,4 +96,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_161909) do
   add_foreign_key "lessons", "users"
   add_foreign_key "likeables", "lessons"
   add_foreign_key "likeables", "users"
+  add_foreign_key "messages", "lessons", column: "lessons_id"
+  add_foreign_key "messages", "users"
 end

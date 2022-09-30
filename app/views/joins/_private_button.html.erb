@@ -1,0 +1,8 @@
+
+<%= turbo_frame_tag "#{dom_id(lesson)} private_joins" do %>
+  <% join_text = join_status ? "Unjoin" : "Join  ⟶" %>
+  <%= link_to join_text, join_lesson_path(id: lesson.id),data: { "turbo-method": :POST }, class:"text-blue-600 dark:text-blue-400 hover:underline" %>
+  <div class="text-gray-600 dark:text-white " > 
+  <%= render 'joins/join_count', lesson: lesson %>
+  </div>
+<% end %>
