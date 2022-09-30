@@ -10,6 +10,9 @@ class User < ApplicationRecord
          has_many :joinable, dependent: :destroy
          has_many :joined_lessons, through: :joinable, source: :lesson
 
+         has_many :bmesseage, dependent: :destroy
+         has_many :comment_lessons, through: :bmesseage, source: :lesson
+
   def joined?(lesson)
     joined_lessons.include?(lesson)
   end

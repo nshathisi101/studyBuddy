@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_30_095718) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_30_110351) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_095718) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "bmesseages", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.integer "lessons_id", null: false
+    t.index ["lessons_id"], name: "index_bmesseages_on_lessons_id"
+    t.index ["user_id"], name: "index_bmesseages_on_user_id"
+  end
+
   create_table "joinables", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "lesson_id", null: false
@@ -49,6 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_095718) do
   end
 
   create_table "lessons", force: :cascade do |t|
+    t.integer "lesson_id"
     t.string "topic"
     t.string "field"
     t.text "description"
@@ -91,6 +102,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_095718) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bmesseages", "lessons", column: "lessons_id"
+  add_foreign_key "bmesseages", "users"
   add_foreign_key "joinables", "lessons"
   add_foreign_key "joinables", "users"
   add_foreign_key "lessons", "users"

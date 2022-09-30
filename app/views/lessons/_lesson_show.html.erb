@@ -1,5 +1,5 @@
+
 <div id="<%= dom_id lesson %>">
-<li id="<%= "#{dom_id(lesson)}_lesson" %>" class="py-3">
 <div class="max-w-2xl mb-3 px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800" style="cursor: auto;">
   <div class="flex items-center justify-between">
     <span class="text-sm font-light text-gray-600 dark:text-gray-400"> <%= l lesson.created_at.to_date, format: :short %></span> 
@@ -13,7 +13,7 @@
                 </path>
             </svg>
         <% end %>
-        <%= link_to  edit_lesson_path(lesson), data: {turbo_frame: "model"} ,class: "flex space-x-2 mr-3 items-center px-3 py-2 bg-green-500 hover:bg-green-800 rounded-md drop-shadow-md", onclick: "toggleModal('modal-id')"  do %>
+        <%= link_to  edit_lesson_path(lesson) ,class: "flex space-x-2 mr-3 items-center px-3 py-2 bg-green-500 hover:bg-green-800 rounded-md drop-shadow-md", onclick: "toggleModal('modal-id')"  do %>
             <svg class="fill-white" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20"
                 viewBox="0 0 50 50">
                 <path
@@ -28,20 +28,19 @@
    
   </div> 
   <div class="mt-2">
-  <%= link_to lesson.topic, lesson, lesson: lesson, class: "text-2xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline"%>
+    <a href="https://stackdiary.com/" class="text-2xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 "><%= lesson.topic %></a> 
     <p class="mt-2 text-gray-600 dark:text-gray-300"><%= lesson.description %></p>
   </div> 
   <div class="flex items-center justify-between mt-4">
-   <% if current_user %>
-    <%= render 'joins/private_button',lesson: lesson, join_status: join_status %>
-   <% else %>
-   <%= link_to 'Join  ⟶', new_user_session_path,  class:"text-blue-600 dark:text-blue-400 hover:underline"%>
-   <% end %>
+  <div class="text-gray-600 dark:text-white " > 
+  <%= render 'joins/join_count', lesson: lesson %>
+  </div>
     <div class="flex items-center">
       <img src="https://stackdiary.com/140x100.png" alt="Author Photo" class="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block"> 
       <a class="font-bold text-gray-700 cursor-pointer dark:text-gray-200"><%= lesson.user_email %></a>
     </div>
   </div>
 </div>
-</li>
 </div>
+
+

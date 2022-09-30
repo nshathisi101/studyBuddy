@@ -1,0 +1,17 @@
+<%= turbo_frame_tag :message do%>
+<%= form_with(model: bmesseage, url: join_comment_path, class: "contents") do |form| %>
+<div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+  <div class="col-span-6">
+    <%= form.label :body , class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"%>
+    <%= form.text_area :body, rows: 4, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+  </div>
+  <%= form.hidden_field :lesson_id, value: @lesson.id %>
+
+  <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+    <%= form.submit "Send" , class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+  </div>
+<% end %>
+<%end%>
+

@@ -11,6 +11,7 @@ class LessonsController < ApplicationController
   end
   # GET /lessons/1 or /lessons/1.json
   def show
+    @bmesseage = Bmesseage.all
   end
 
   # GET /lessons/new
@@ -104,6 +105,20 @@ class LessonsController < ApplicationController
     end
   end
 
+  def comment
+    id =params[:lesson_id]
+    @lesson = Lesson.find(params[:lesson_id])
+    @lesson.user_id = params[:user_id]
+    @lesson.save
+    
+    @lesson.save
+    respond_to do |format|
+      format.turbo_stream do 
+        render turbo_stream: messageing(id)
+      end
+    end
+  end
+
   private
 
   def private_stream
@@ -112,6 +127,18 @@ class LessonsController < ApplicationController
                           partial: 'joins/private_button',
                           locals:{
                             lesson: @lesson,
+                            join_status: current_user.joined?(@lesson)
+                        })
+  end
+
+  private
+
+  def messageing(id)
+    @bmesseages = Bmesseage.all
+    turbo_stream.replace("messageing", 
+                          partial: 'bmesseages/messages',
+                          locals:{
+                            bmesseage: @bmesseages,
                             join_status: current_user.joined?(@lesson)
                         })
   end
@@ -126,5 +153,9 @@ class LessonsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def lesson_params
       params.require(:lesson).permit(:topic, :field, :description, :user_id)
+    end
+
+    def bmesseage_params
+      params.require(:bmesseage).permit(:body,:user_id)
     end
 end
